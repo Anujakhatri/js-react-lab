@@ -5,6 +5,7 @@
   </head>
   <body>
     <div class="js-container"></div>
+  
     <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
@@ -13,8 +14,11 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
       const button = <button >hello</button>;
+      const paragraph = <p>paragraph of text</p>;
       const container = document.querySelector('.js-container');
+      const container2= document.querySelector('.js-body');
       ReactDOM.createRoot(container).render(button);
+      ReactDOM.createRoot(container2).render(paragraph);
     </script>
   </body>
 </html> 
