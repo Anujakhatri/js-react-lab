@@ -16,7 +16,10 @@
       function ChatInput(){
         return(
           <>
-            <input placeholder ="Send a message to your chatbot" size="30" />
+            <input
+              placeholder ="Send a message to your chatbot" 
+              size="30" 
+            />
             <button> Send</button>
           </>  
         );
@@ -27,7 +30,7 @@
         //const sender = props.sender;
         //const {message, sender} = props;
 
-        if (sender === "bot"){
+        /*if (sender === "bot"){
           return(
             <div>
               <img src= "robot.jpg" width = "50"/>
@@ -36,27 +39,39 @@
             </div>
           )
         }
+        */
         return(
           <div>
+            {sender === "user" && (
+              <img src= "user.png" width = "50"/>
+            )}
             {message}
-            <img src= "user.png" width = "50"/>
+            {sender === "bot" && (
+              <img src= "robot.jpg" width = "50"/>
+            )}
+            
           </div>
-        )
+        );
       }
 
-      const app =(
-        <>
-          {ChatInput()}
-          <ChatMessage messsage="hello chatbot" sender ="user"/>
-          <ChatMessage message = "Hello! How can I help you today?" sender="bot"/>
-          <ChatMessage message = "I need help with my order." sender = "user" />
-          <ChatMessage message = "What is the status of my order?" sender = "bot" />
-          
-        </>  
-      );
+      function App(){ 
+        return(
+          <>
+            {ChatInput()}
+            <ChatMessage message="hello chatbot" sender ="user"/>
+            <ChatMessage message = "Hello! How can I help you today?" sender="bot"/>
+            <ChatMessage message = "I need help with my order." sender = "user" />
+            <ChatMessage message = "What is the status of my order?" sender = "bot" />
+            <ChatMessage message = "I need help with my order." sender = "user" />
+            <ChatMessage message = "What is the status of my order?" sender = "bot" />
+            
+          </>  
+        );
+      }
+      
       const container = document.querySelector('.js-container');
       
-      ReactDOM.createRoot(container).render(app);
+      ReactDOM.createRoot(container).render(<App />);
     </script>
   </body>
 </html> 
