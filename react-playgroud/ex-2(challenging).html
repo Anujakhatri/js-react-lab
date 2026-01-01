@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components and Props</title>
+</head>
+<body>
+    <div class="js-container"></div>
+  
+    <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+       
+        
+        function ProductDetails({imageSrc, name, price, discountPrice}){
+            return(
+                <> 
+                    <p> {name}</p>
+
+                    <img src={imageSrc} alt= {name} width="120" />
+                    
+                    {!discountPrice ? (
+                        <p>Price : ${price}</p> 
+                    ): (
+                        <>
+                            <p>
+                                Price : <del>${price}</del>
+                            </p>  
+                            <p>
+                                Discount Price : ${discountPrice}
+                            </p>  
+                        </>
+                    )}
+                    
+                    <button>Add to Cart</button>
+                </>
+            );
+        };
+
+        function App(){
+            return(
+                <>
+                    {ProductDetails({
+                        name:"Cotton socks",
+                        imageSrc: "robot.jpg",
+                        price:"10.90", 
+                        discountPrice:"9.99"
+                        })
+                    }
+                    {ProductDetails({
+                        name:"Tennis balls", 
+                        imageSrc:"user.png",
+                        price:"6.00", 
+                        discountPrice:"5.99"
+                        })
+                    }
+                    {ProductDetails({
+                        name:"Plain T-shirt",
+                        imageSrc:"robot.jpg", 
+                        price:"7.99"
+                        })
+                    }
+                </>
+            )
+        }
+
+        const container = document.querySelector('.js-container');
+        
+        ReactDOM.render(<App />, container);
+    </script>    
+</body>
+</html>
