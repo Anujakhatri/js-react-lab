@@ -43,27 +43,63 @@
         return(
           <div>
             {sender === "user" && (
-              <img src= "user.png" width = "50"/>
+              <img src= "user.png" width = "40"/>
             )}
             {message}
             {sender === "bot" && (
-              <img src= "robot.jpg" width = "50"/>
+              <img src= "robot.jpg" width = "40"/>
             )}
             
           </div>
         );
       }
-
-      function App(){ 
+      function ChatMessages(){
+        const chatMessages = [{
+          message: "hello chatbot",
+          sender: "user",
+          id: "1"
+        },{
+          message: "Hello! How can I help you today?",
+          sender: "bot",
+          id: "2"
+        },{
+          message: "I need help with my order.",
+          sender: "user",
+          id: "3"
+        },{
+          message: "What is the status of my order?",
+          sender: "bot",
+          id: "4"
+        },{
+          message: "can you get me today date?",
+          sender : "user",
+          id: "5"
+        },{
+          message: "Today is january 2nd 2026.",
+          sender: "bot",
+          id: "6"
+        }];
         return(
           <>
-            {ChatInput()}
-            <ChatMessage message="hello chatbot" sender ="user"/>
-            <ChatMessage message = "Hello! How can I help you today?" sender="bot"/>
-            <ChatMessage message = "I need help with my order." sender = "user" />
-            <ChatMessage message = "What is the status of my order?" sender = "bot" />
-            <ChatMessage message = "I need help with my order." sender = "user" />
-            <ChatMessage message = "What is the status of my order?" sender = "bot" />
+            {chatMessages.map((chatMessage) => {
+              return(
+                <ChatMessage 
+                  message = {chatMessage.message} 
+                  sender = {chatMessage.sender} 
+                  key = {chatMessage.id}
+                />
+              );
+            })}
+          </> 
+        );
+    }
+
+      function App(){ 
+
+          return(
+          <>
+            <ChatInput />
+            <ChatMessages />
             
           </>  
         );
