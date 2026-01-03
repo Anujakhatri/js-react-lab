@@ -14,13 +14,32 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
       function ChatInput(){
+        const [inputText, setInputText] = React.useState(' ');
+        function saveInputText(event){
+          setInputText(event.target.value);
+        }
+
+        function sendMessage(){
+          setChatMessages([
+            ...chatMessages,
+            {
+              message: "test",
+              sender: "user",
+              id: crypto.randomUUID()
+            }
+            
+          ]); 
+        }
         return(
           <>
             <input
               placeholder ="Send a message to your chatbot" 
               size="30" 
+              onChange={saveInputText}
             />
-            <button> Send</button>
+            <button
+              onClick={sendMessage}
+            > Send</button>
           </>  
         );
       }
@@ -54,7 +73,7 @@
         );
       }
       function ChatMessages(){
-        const chatMessages = [{
+        const [chatMessages, setChatMessages] = React.useState([{
           message: "hello chatbot",
           sender: "user",
           id: "1"
@@ -78,7 +97,11 @@
           message: "Today is january 2nd 2026.",
           sender: "bot",
           id: "6"
-        }];
+        }]);
+        // const [chatMessages, setChatMessages] = array;
+        // const chatMessages = array[0];  //current state
+        // const setChatMessages = array[1]; //updater function
+
         return(
           <>
             {chatMessages.map((chatMessage) => {
