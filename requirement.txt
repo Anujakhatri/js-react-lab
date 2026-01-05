@@ -3,5 +3,26 @@ cd Documents/javascript/js-react-lab/javascript
 technic to open console in web in mac
 ⌥ Option + ⌘ Command + J
 
+goto folder and install npm(node package Manager) --  type of tool which manages, downloads, and runs all the tools and libraries your React app needs.
+React cannot work alone.
 
- 
+
+cd React-project
+npm install   # only once
+npm run dev   # every time you work
+
+ | Command                    | Meaning                  |
+| -------------------------- | ------------------------ |
+| `npm install`              | Install all dependencies |
+| `npm run dev`              | Start React app          |
+| `npm install package-name` | Add new library          |
+| `npm run build`            | Create production build  |
+
+
+🗂️ How npm fits into your React project
+
+React-project
+├── package.json      ← npm reads this
+├── node_modules/     ← npm creates this
+├── src/              ← your React code
+└── vite.config.js
