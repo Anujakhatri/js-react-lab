@@ -16,11 +16,22 @@
 
     <script type="text/babel">
        
-        
+        function ClickButton(){
+            return(
+                <>
+                    <button>Click 3 times</button>
+                </>
+            )
+        }
        
 
         function App(){
-            
+            return(
+                <>
+                   {ClickButton()} 
+                </>
+            )
+        
         }
 
         const container = document.querySelector('.js-container');
