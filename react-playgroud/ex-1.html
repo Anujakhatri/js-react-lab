@@ -3,11 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercise</title>
+    <title>Basic Calculation</title>
 </head>
 <body>
-    <div id="output"></p>
-    </div>
-    <script src="react-basics.js"></script>
+    <div class="js-container"></div>
+  
+    <script src="https://unpkg.com/supersimpledev@8.6.4/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script type="text/babel">
+
+    // exercise1
+    // 1 pack of socks =$10
+    // 2 Tshirts = $8 each
+            
+        function App(){
+            const socksPrice = 10;
+            const tshirtPrice = 8;
+            const tshirtQuantity = 2;
+            const productCost = socksPrice + (tshirtPrice * tshirtQuantity);
+            
+            return(
+                <>
+                   <p>Product Cost : ${productCost}</p>   
+                </>
+            )
+        }
+        
+        const container = document.querySelector('.js-container');
+        
+        ReactDOM.createRoot(container).render(<App />);
+    </script>    
 </body>
 </html>
