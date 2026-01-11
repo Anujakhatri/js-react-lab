@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Components and Props</title>
+    <title>Two Counters</title>
 </head>
 <body>
     <div class="js-container"></div>
@@ -16,23 +16,89 @@
 
     <script type="text/babel">
        
-        function ClickButton(){
+        function ClickButton({count, setCount}){
+            return(
+                <button onClick={setCount}>
+                    Clicked {count} times
+                </button>
+            );
+            } 
+            
+        function App(){
+            const [countA, setCountA] = React.useState(0);
+            const [countB, setCountB] = React.useState(0);
+
+            function handleClickA(){
+                setCountA(prevCount => {
+                    if (prevCount ===3){
+                        return 1;
+                    } 
+                    return prevCount +1;
+                }); 
+            }
+            function handleClickB(){
+                setCountB(prevCount =>{
+                if (prevCount ===3){
+                    return 1;
+                }
+                return prevCount +1
+                });
+            }
+
+            function resetAll(){
+                setCountA(0);
+                setCountB(0);
+            }
             return(
                 <>
-                    <button>Click 3 times</button>
+                    <ClickButton count={countA} setCount={handleClickA} />
+                    <ClickButton count={countB} setCount={handleClickB} />
+                    <button reset onClick = {resetAll}>
+                        Reset
+                    </button>
                 </>
-            )
-        }
-       
+            );
+        }    
+            
 
+            /* function handleClick(){
+                setCount(prevCount => {
+                    if(prevCount ===3){
+                        return 1;
+                    }
+                    return prevCount +1    
+                });
+            }
+            function setcount(){
+                    setCount(0);
+            }
+           
+            return(
+            
+                <>
+                    <button onClick={handleClick}>
+                        Clicked {count} times
+                    </button>  
+
+                    <button reset onClick = {setcount}>
+                        Reset
+                    </button>
+                    
+                </>
+            );
+        }       
+        
         function App(){
             return(
                 <>
-                   {ClickButton()} 
+                    <ClickButton />
+                    <ClickButton /> 
+                   
                 </>
-            )
+            );
         
         }
+        */    
 
         const container = document.querySelector('.js-container');
         
