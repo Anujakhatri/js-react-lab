@@ -33,22 +33,22 @@
 
 import { useEffect, useState } from 'react'
 import Search from './components/Search.jsx'
-import Spinner from './components/Spinner.jsx'
+import Loading from './components/Loading.jsx'
 import MovieCard from './components/MovieCard.jsx'
 import { useDebounce } from 'react-use'
-import { getTrendingMovies, updateSearchCount } from './appwrite.js'
+// import { getTrendingMovies, updateSearchCount } from './appwrite.js'
 
-// const API_BASE_URL = 'https://api.themoviedb.org/3';
+const API_BASE_URL = 'https://api.themoviedb.org/3';
 
-// const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
-// const API_OPTIONS = {
-//   method: 'GET',
-//   headers: {
-//     accept: 'application/json',
-//     Authorization: `Bearer ${API_KEY}`
-//   }
-// } yo edited ho
+const API_OPTIONS = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${API_KEY}`
+  }
+} 
 
 const App = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
@@ -124,7 +124,7 @@ const App = () => {
 
       <div className="wrapper">
         <header>
-          <img src="./hero.png" alt="Hero Banner" />
+          <img src="./hero-img.png" alt="Hero Banner" />
           <h1>Find <span className="text-gradient">Movies</span> You'll Enjoy Without the Hassle</h1>
 
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -149,7 +149,7 @@ const App = () => {
           <h2>All Movies</h2>
 
           {isLoading ? (
-            <Spinner />
+            <Loading />
           ) : errorMessage ? (
             <p className="text-red-500">{errorMessage}</p>
           ) : (
