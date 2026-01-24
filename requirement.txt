@@ -1,4 +1,4 @@
-cd Documents/javascript/js-react-lab/javascript
+cd Documents/js-react-lab/
 
 technic to open console in web in mac
 ⌥ Option + ⌘ Command + J
