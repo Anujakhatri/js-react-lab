@@ -26,3 +26,44 @@ React-project
 ├── node_modules/     ← npm creates this
 ├── src/              ← your React code
 └── vite.config.js
+
+
+try {
+  // fetch + parse only
+} catch (err) {
+  // API error
+}
+
+try {
+  // analytics / logging / appwrite
+} catch (err) {
+  console.warn('Non-critical error', err);
+}
+
+TMDB VS Appwrite
+
+    User search → TMDB
+                ↓
+            Appwrite (store)
+                ↓
+        App trending section
+
+Think of Appwrite as three things:
+
+    A database
+    An SDK (JavaScript library)
+    A URL your app talks to
+
+Your React app:
+
+    does NOT run Appwrite
+    does NOT host Appwrite
+    only calls it
+
+Appwrite is used for things like:
+
+    saving data (database)
+    tracking searches
+    user authentication
+    analytics (e.g., “most searched movies”)
+    server-side logic (functions)   

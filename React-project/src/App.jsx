@@ -3,7 +3,9 @@ import Search from './components/Search.jsx'
 import Loading from './components/Loading.jsx'
 import MovieCard from './components/MovieCard.jsx'
 import { useDebounce } from 'react-use'
+
 // import { getTrendingMovies, updateSearchCount } from './appwrite.js'
+import { updateSearchCount } from './appwrite.js'
 
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 
@@ -18,6 +20,7 @@ const API_OPTIONS = {
 } 
 
 const App = () => {
+    // Debounce the search term to prevent making too many API requests
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('')
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -26,8 +29,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [trendingMovies, setTrendingMovies] = useState([]);
-
-  // Debounce the search term to prevent making too many API requests
+  
   // by waiting for the user to stop typing for 500ms
   useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
 
@@ -38,7 +40,7 @@ const App = () => {
     try {
       const endpoint = query
         ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false`
-        : `${API_BASE_URL}/discover/movie?with_original_language=ne|hi&sort_by=popularity.desc`;
+        : `${API_BASE_URL}/discover/movie?with_original_language=ne&sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 
@@ -56,7 +58,7 @@ const App = () => {
 
       setMovieList(data.results || []);
 
-      if(query && data.results.length > 0) {
+      if(query && data.results.length > 0 && typeof updateSearchCount === 'function') {
         await updateSearchCount(query, data.results[0]);
       }
     } catch (error) {
