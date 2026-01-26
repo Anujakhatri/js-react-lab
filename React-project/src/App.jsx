@@ -1,36 +1,3 @@
-// import React from 'react'
-// import { useState } from 'react'
-// import Search from './components/Search'
-
-// // import reactLogo from './assets/react.svg'
-// // import viteLogo from '/vite.svg'
-// // import './App.css'
-
-// const App=() => {
-//   const [searchTerm, setSearchTerm] = useState('')
-
-//   return (
-//     <main>
-//             <div className="pattern"/>
-//             <div className="wrapper">
-//                 <header>
-//                     <img src="./hero-img.png" alt="Hero Banner" />
-//                     <h1>Find <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">Movies</span> You'll Enjoy Without the Hassle</h1>
-
-//                     <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-//                 </header>
-
-
-                
-//             </div>   
-            
-//         </main>
-//   )
-// }
-
-// export default App
-
-
 import { useEffect, useState } from 'react'
 import Search from './components/Search.jsx'
 import Loading from './components/Loading.jsx'
@@ -70,8 +37,8 @@ const App = () => {
 
     try {
       const endpoint = query
-        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+        ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}&include_adult=false`
+        : `${API_BASE_URL}/discover/movie?with_original_language=ne|hi&sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 
@@ -124,8 +91,9 @@ const App = () => {
 
       <div className="wrapper">
         <header>
-          <img src="./hero-img.png" alt="Hero Banner" />
-          <h1>Find <span className="text-gradient">Movies</span> You'll Enjoy Without the Hassle</h1>
+          <img src="./hero-img.png" alt="Hero Banner" className = "mb-10" />
+          
+          <h1> तपाईंलाई मन पर्ने <span className="text-gradient">चलचित्रहरू</span> बिना झन्झट खोज्नुहोस्। </h1>
 
           <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </header>
