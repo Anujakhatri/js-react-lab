@@ -13,20 +13,24 @@ const database = new Databases(client);
 export const updateSearchCount = async (searchTerm, movie) => {
   // 1. Use Appwrite SDK to check if the search term exists in the database
  try {
-  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+  const result = await database.listRows(DATABASE_ID, TABLE_ID, [
     Query.equal('searchTerm', searchTerm),
+    Query.orderDesc('count'),
   ])
 
   // 2. If it does, update the count
-  if(result.documents.length > 0) {
-   const doc = result.documents[0];
+  if(result.rows.length > 0) {
+   const doc = result.rows[0];
 
-   await database.updateDocument(DATABASE_ID, COLLECTION_ID, doc.$id, {
+   await database.updateRow(DATABASE_ID, TABLE_ID, doc.$id, {
+    searchTerm: doc.searchTerm,
     count: doc.count + 1,
+    poster_url : doc.poster_url,
+    movie_id : doc.movie.id
    })
   // 3. If it doesn't, create a new document with the search term and count as 1
   } else {
-   await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
+   await database.createRow(DATABASE_ID, TABLE_ID, ID.unique(), {
     searchTerm,
     count: 1,
     movie_id: movie.id,
@@ -40,12 +44,12 @@ export const updateSearchCount = async (searchTerm, movie) => {
 
 export const getTrendingMovies = async () => {
  try {
-  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+  const result = await database.listRows(DATABASE_ID, TABLE_ID, [
     Query.limit(5),
     Query.orderDesc("count")
   ])
 
-  return result.documents;
+  return result.rows;
  } catch (error) {
   console.error(error);
  }
