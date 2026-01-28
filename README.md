@@ -8,8 +8,6 @@ The main purpose of this lab is to understand how React works internally and how
 
 ---
 
-## What I Learned
-
 ### JavaScript Basics
 - Variables (`const`, `let`)
 - Functions
