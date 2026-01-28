@@ -15,13 +15,6 @@ MovieCard → each movie display
 | MovieCard | Display  | Movie poster |
 | Loading   | Feedback | Waiting sign |
 
-| Layer         | Responsibility      |
-| ------------- | ------------------- |
-| `Search.jsx`  | User input          |
-| `App.jsx`     | State + UI          |
-| `appwrite.js` | Database logic      |
-| TMDB API      | Movie data          |
-| Appwrite      | Your analytics data |
 
  Visual Data Flow (SUPER IMPORTANT)
 
@@ -47,16 +40,4 @@ App.jsx
         ↓
 Trending Movies UI
 
-Note: App.jsx and appwrite.js are not linked
 
-<!-- Correct — and that’s GOOD DESIGN. -->
-
-They are connected via:
-
-. function imports
-
-. data passed as arguments
-
-. async/await
-
-This is called : Loose coupling

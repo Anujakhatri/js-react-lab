@@ -11,29 +11,31 @@ const client = new Client()
 const database = new Databases(client);
 
 export const updateSearchCount = async (searchTerm, movie) => {
+
+  if (!searchTerm || !movie) return;
+  const normalizedTerm = searchTerm.trim().toLowerCase();
+  // console.log(normalizedTerm, movie.id);
   
   // 1. Use Appwrite SDK to check if the search term exists in the database
  try {
-  const result = await database.listRows(DATABASE_ID, COLLECTION_ID, [
-    Query.equal('searchTerm', searchTerm),
+  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+    Query.equal('searchTerm', normalizedTerm),
     Query.orderDesc('count'),
   ]);
 
   // 2. If it does, update the count
-  if(result.rows.length > 0) {
-   const doc = result.rows[0];
+  if(result.documents.length > 0) {
+   const doc = result.documents[0];
 
    await database.updateDocument(DATABASE_ID, COLLECTION_ID, doc.$id, {
     searchTerm: doc.searchTerm,
     count: doc.count + 1 ,
-    // poster_url : doc.poster_url,
-    // movie_id : doc.movie_id
    });
 
   // 3. If it doesn't, create a new document with the search term and count as 1
   } else {
    await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
-      searchTerm: searchTerm,
+      searchTerm: normalizedTerm,
       count: 1,
       movie_id: movie.id,
       poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
