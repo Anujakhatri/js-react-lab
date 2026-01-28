@@ -31,28 +31,7 @@ const App = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
 
   // by waiting for the user to stop typing for 500ms
-  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm])
-
-  // Remove this line:
-
-
-// Add this instead:
-// useEffect(() => {
-//   const handler = setTimeout(() => {
-//     setDebouncedSearchTerm(searchTerm);
-//   }, 500);
-
-//   return () => clearTimeout(handler); // cleanup on next change
-// }, [searchTerm]);
-
-// useEffect(() => {
-//   if (debouncedSearchTerm) {
-//     console.log('Debounced searchTerm:', debouncedSearchTerm);
-//   }
-//   fetchMovies(debouncedSearchTerm);
-// }, [debouncedSearchTerm]);
-
-  
+  useDebounce(() => setDebouncedSearchTerm(searchTerm), 500, [searchTerm]) 
 
   const fetchMovies = async (query = '') => {
     console.log('fetchMovies query:', query);
@@ -64,7 +43,7 @@ const App = () => {
     try {
       const endpoint = query
         ? `${API_BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
-        : `${API_BASE_URL}/discover/movie?sort_by=popularity.desc`;
+        : `${API_BASE_URL}/discover/movie?with_original_language=ne&sort_by=popularity.desc`;
 
       const response = await fetch(endpoint, API_OPTIONS);
 

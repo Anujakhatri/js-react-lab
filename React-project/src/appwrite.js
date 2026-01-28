@@ -11,17 +11,17 @@ const client = new Client()
 const database = new Databases(client);
 
 export const updateSearchCount = async (searchTerm, movie) => {
-  console.log('updateSearchcount called', searchTerm, movie?.id);
+  
   // 1. Use Appwrite SDK to check if the search term exists in the database
  try {
-  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
+  const result = await database.listRows(DATABASE_ID, COLLECTION_ID, [
     Query.equal('searchTerm', searchTerm),
     Query.orderDesc('count'),
   ]);
 
   // 2. If it does, update the count
-  if(result.documents.length > 0) {
-   const doc = result.documents[0];
+  if(result.rows.length > 0) {
+   const doc = result.rows[0];
 
    await database.updateDocument(DATABASE_ID, COLLECTION_ID, doc.$id, {
     searchTerm: doc.searchTerm,
