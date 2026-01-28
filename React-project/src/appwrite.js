@@ -1,8 +1,8 @@
-import { Client, Databases, ID, Query } from 'appwrite'
+import { Client, Databases, ID, Query, Permission, Role } from 'appwrite'
 
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID;
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
-const TABLE_ID = import.meta.env.VITE_APPWRITE_TABLE_ID;
+const COLLECTION_ID = import.meta.env.VITE_APPWRITE_TABLE_ID;
 
 const client = new Client()
   .setEndpoint('https://nyc.cloud.appwrite.io/v1')
@@ -11,47 +11,55 @@ const client = new Client()
 const database = new Databases(client);
 
 export const updateSearchCount = async (searchTerm, movie) => {
+  console.log('updateSearchcount called', searchTerm, movie?.id);
   // 1. Use Appwrite SDK to check if the search term exists in the database
  try {
-  const result = await database.listRows(DATABASE_ID, TABLE_ID, [
+  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
     Query.equal('searchTerm', searchTerm),
-    // Query.orderDesc('count'),
+    Query.orderDesc('count'),
   ]);
 
   // 2. If it does, update the count
-  if(result.rows.length > 0) {
-   const doc = result.rows[0];
+  if(result.documents.length > 0) {
+   const doc = result.documents[0];
 
-   await database.updateRow(DATABASE_ID, TABLE_ID, result.rows[0].$id, {
+   await database.updateDocument(DATABASE_ID, COLLECTION_ID, doc.$id, {
     searchTerm: doc.searchTerm,
-    count: result.rows[0].count + 1 //doc.count + 1,
+    count: doc.count + 1 ,
     // poster_url : doc.poster_url,
     // movie_id : doc.movie_id
    });
+
   // 3. If it doesn't, create a new document with the search term and count as 1
   } else {
-   await database.createRow(DATABASE_ID, TABLE_ID, ID.unique(), {
-    searchTerm: term,
-    count: 1,
-    movie_id: movie.id,
-    poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-   });
+   await database.createDocument(DATABASE_ID, COLLECTION_ID, ID.unique(), {
+      searchTerm: searchTerm,
+      count: 1,
+      movie_id: movie.id,
+      poster_url: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+    },
+    [
+      Permission.read(Role.any()),
+      Permission.write(Role.any()),
+    ]
+   );
   }
  } catch (error) {
-  console.error('Appwrite error:',error.message);
+  console.error('Appwrite error:',error);
  }
 };
 
 export const getTrendingMovies = async () => {
  try {
-  const result = await database.listRows(DATABASE_ID, TABLE_ID, [
+  const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [
     Query.limit(5),
     Query.orderDesc("count")
   ]);
 
-  return result.rows;
+  return result.documents;
  } catch (error) {
   console.error(error);
   return [];
  }
 };
+

@@ -10,7 +10,10 @@ const Search = ({ searchTerm, setSearchTerm }) => {
           type="text"
           placeholder="आज के हेर्ने? यहाँ खोज्नुहोस्"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            console.log('Search input:', e.target.value);
+          }}
         />
       </div>
     </div>
