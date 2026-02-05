@@ -8,7 +8,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
 
         <input
           type="text"
-          placeholder="आज के हेर्ने? यहाँ खोज्नुहोस्"
+          placeholder="आज के हेर्ने?"
           value={searchTerm}
           onChange={(e) => {
             setSearchTerm(e.target.value);
