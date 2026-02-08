@@ -1,6 +1,4 @@
-cd Documents/js-react-lab/Movie_Search
-when particular file should upload in git
- find . -name "Search.jsx"
+
 
 technic to open console in web in mac
 ⌥ Option + ⌘ Command + J
