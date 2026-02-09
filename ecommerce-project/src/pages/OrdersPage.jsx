@@ -1,10 +1,11 @@
-import './Orders.css';
-export function Orders() {
+import './OrdersPage.css';
+export function OrdersPage() {
     return (
         <>
+            <title>Orders</title>
             <div className="header">
                 <div className="left-section">
-                    <a href="index.html" className="header-link">
+                    <a href="/" className="header-link">
                         <img className="logo"
                             src="images/logo-white.png" />
                         <img className="mobile-logo"
@@ -80,7 +81,7 @@ export function Orders() {
                             </div>
 
                             <div className="product-actions">
-                                <a href="/traking">
+                                <a href="/tracking">
                                     <button className="track-package-button button-secondary">
                                         Track package
                                     </button>
@@ -108,7 +109,7 @@ export function Orders() {
                             </div>
 
                             <div className="product-actions">
-                                <a href="/traking">
+                                <a href="/tracking">
                                     <button className="track-package-button button-secondary">
                                         Track package
                                     </button>
@@ -159,7 +160,7 @@ export function Orders() {
                             </div>
 
                             <div className="product-actions">
-                                <a href="/traking">
+                                <a href="/tracking">
                                     <button className="track-package-button button-secondary">
                                         Track package
                                     </button>
