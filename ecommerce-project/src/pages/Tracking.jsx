@@ -1,4 +1,4 @@
-import './Orders.css'
+import './Tracking.css'
 export function Tracking() {
     return (
         <>
@@ -21,12 +21,12 @@ export function Tracking() {
                 </div>
 
                 <div class="right-section">
-                    <a class="orders-link header-link" href="orders.html">
+                    <a class="orders-link header-link" href="/orders">
 
                         <span class="orders-text">Orders</span>
                     </a>
 
-                    <a class="cart-link header-link" href="checkout.html">
+                    <a class="cart-link header-link" href="/checkout">
                         <img class="cart-icon" src="images/icons/cart-icon.png" />
                         <div class="cart-quantity">3</div>
                         <div class="cart-text">Cart</div>
@@ -36,7 +36,7 @@ export function Tracking() {
 
             <div class="tracking-page">
                 <div class="order-tracking">
-                    <a class="back-to-orders-link link-primary" href="orders.html">
+                    <a class="back-to-orders-link link-primary" href="/orders">
                         View all orders
                     </a>
 
