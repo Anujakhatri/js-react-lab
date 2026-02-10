@@ -6,10 +6,7 @@ export function Header() {
             <div className="header">
                 <div className="left-section">
                     <Link to="/" className="header-link">
-                        <img className="logo"
-                            src="images/logo-white.png" />
-                        <img className="mobile-logo"
-                            src="images/mobile-logo-white.png" />
+                        <span className="logo-text">Easy Shopping</span>
                     </Link>
                 </div>
 
