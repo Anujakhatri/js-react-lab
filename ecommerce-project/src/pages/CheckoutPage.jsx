@@ -4,14 +4,13 @@ import './checkout-header.css'
 export function CheckoutPage() {
     return (
         <>
-        <title>Checkout</title>
+            <title>Checkout</title>
 
             <div className="checkout-header">
                 <div className="header-content">
                     <div className="checkout-header-left-section">
-                        <a href="/">
-                            <img className="logo" src="images/logo.png" />
-                            <img className="mobile-logo" src="images/mobile-logo.png" />
+                        <a href="/" className="header-link">
+                            <span className="logo-text">Easy Shopping</span>
                         </a>
                     </div>
 
