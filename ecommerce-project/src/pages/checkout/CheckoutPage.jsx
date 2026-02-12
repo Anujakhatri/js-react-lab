@@ -4,7 +4,8 @@ import formatMoney from '../../utils/money';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import {orderSummary} from './OrderSummary';
+import { OrderSummary } from './OrderSummary';
+import { PaymentSummary } from './PaymentSummary';
 export function CheckoutPage({ cart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
     const [paymentSummary, setPaymentSummary] = useState(null);
@@ -15,9 +16,9 @@ export function CheckoutPage({ cart }) {
             setDeliveryOptions(response.data);
             response = await axios.get('/api/payment-summary');
             setPaymentSummary(response.data);
-            }
+        }
         fetchCheckoutData();
-    },[]);
+    }, []);
     return (
         <>
             <title>Checkout</title>
@@ -45,8 +46,8 @@ export function CheckoutPage({ cart }) {
                 <div className="page-title">Review your order</div>
 
                 <div className="checkout-grid">
-                    <orderSummary cart={cart} deliveryOptions={deliveryOptions}/>
-                    <paymentSummary paymentSummary={paymentSummary} />
+                    <OrderSummary cart={cart} deliveryOptions={deliveryOptions} />
+                    <PaymentSummary paymentSummary={paymentSummary} />
                 </div>
             </div>
         </>
