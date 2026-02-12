@@ -1,14 +1,14 @@
+import axios from 'axios';
 import './HomePage.css'
 import { Header } from '../components/Header';
 import { products } from '../../starting-code/data/products';
 
 export function HomePage() {
     //this code is actually run into our local host.
-    fetch('http://localhost:3000/api/products')
+    axios.get('http://localhost:3000/api/products')
         .then((response) => {
-            return response.json();
-        }).then((data) => {
-            console.log(data);
+            // const data = response.data;
+            console.log(response.data);
         });
 
     return (
