@@ -1,21 +1,21 @@
-import {formatMoney} from '../utils/money';
+import formatMoney from '../../utils/money';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './HomePage.css'
-import { Header } from '../components/Header';
+import { Header } from '../../components/Header';
 
-export function HomePage({ cart }) {
-    const [products, setProducts] = useState([]);
+export function HomePage({ addToCart, cart, products }) {
+    // const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        axios.get('/api/products')
-            .then((response) => {
-                setProducts(response.data);
-            });
+    // useEffect(() => {
+    //     axios.get('/api/products')
+    //         .then((response) => {
+    //             setProducts(response.data);
+    //         });
 
-    }, []);
+    // }, []);
 
-    // const [quantities, setQuantities] = useState({});
+    const [quantities, setQuantities] = useState({});
 
     return (
         <>
@@ -38,7 +38,7 @@ export function HomePage({ cart }) {
 
                                 <div className="product-rating-container">
                                     <img className="product-rating-stars"
-                                        src={`images/ratings/rating-${product.rating.stars * 10}.png`} />  {/* 1 star = 10 rating points */}
+                                        src={`images / ratings / rating - ${product.rating.stars * 10}.png`} />  {/* 1 star = 10 rating points */}
                                     <div className="product-rating-count link-primary">
                                         {product.rating.count}
                                     </div>
