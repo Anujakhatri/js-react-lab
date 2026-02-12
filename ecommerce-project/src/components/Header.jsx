@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 import './header.css'
-export function Header() {
+import { CartItem } from '../../../ecommerce-backend/models/CartItem';
+export function Header({cart}) {
+    let totalQuantity = 0;
+    cart.forEach((CartItem) =>{
+        totalQuantity += CartItem.quantity;
+    });
     return (
         <>
             <div className="header">
@@ -20,9 +25,10 @@ export function Header() {
                     <Link className="orders-link header-link" to="/orders">
                         <span className="orders-text">Orders</span>
                     </Link>
+
                     <Link className="cart-link header-link" to="/checkout">
                         <img className="cart-icon" src="images/icons/cart-icon.png" />
-                        <div className="cart-quantity">3</div>
+                        <div className="cart-quantity">{totalQuantity}</div>
                         <div className="cart-text">Cart</div>
                     </Link>
                 </div>
