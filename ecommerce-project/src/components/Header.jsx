@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './header.css'
-import { CartItem } from '../../../ecommerce-backend/models/CartItem';
+// import { CartItem } from '../../../ecommerce-backend/models/CartItem';
 export function Header({cart}) {
     let totalQuantity = 0;
     cart.forEach((CartItem) =>{
