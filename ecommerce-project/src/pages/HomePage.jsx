@@ -4,9 +4,8 @@ import { useEffect, useState } from 'react';
 import './HomePage.css'
 import { Header } from '../components/Header';
 
-export function HomePage() {
-    const[products, setProducts] =useState([]);
-    const [cart, setCart] = useState([]);
+export function HomePage({ cart }) {
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         axios.get('/api/products')
@@ -14,15 +13,13 @@ export function HomePage() {
                 setProducts(response.data);
             });
 
-        axios.get('/api/cart-items') 
-         .then((response) => {
-             setCart(response.data);
-         })  
-
     }, []);
+
+    // const [quantities, setQuantities] = useState({});
+
     return (
         <>
-            <Header cart={cart}/>  {/* parent component of cart */}
+            <Header cart={cart} />  {/* parent component of cart */}
 
             <title>HomePage</title>
             <div className="home-page">
@@ -52,7 +49,7 @@ export function HomePage() {
                                 </div>
 
                                 <div className="product-quantity-container">
-                                    <select>
+                                    <select onChange={(e) => setQuantities({ ...quantities, [product.id]: parseInt(e.target.value) })} value={quantities[product.id] || 1}>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -73,7 +70,7 @@ export function HomePage() {
                                     Added
                                 </div>
 
-                                <button className="add-to-cart-button button-primary">
+                                <button className="add-to-cart-button button-primary" onClick={() => addToCart(product, quantities[product.id] || 1)}>
                                     Add to Cart
                                 </button>
                             </div>
