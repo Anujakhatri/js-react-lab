@@ -4,25 +4,25 @@ import './HomePage.css'
 import { Header } from '../../components/Header';
 import { ProductsGrid } from './ProductsGrid';
 
-export function HomePage({ cart }) {
+export function HomePage({ cart, refreshCart }) {
     const [products, setProducts] = useState([]);
 
-    useEffect(() =>{
+    useEffect(() => {
         const getHomeData = async () => {
             const response = await axios.get('/api/products');
             setProducts(response.data);
         }
         getHomeData();
-    },[]);
+    }, []);
 
     return (
         <>
-         <title>Easy Shopping</title>
+            <title>Easy Shopping</title>
 
             <Header cart={cart} />  {/* parent component of cart */}
 
             <div className="home-page">
-                <ProductsGrid products={products} />
+                <ProductsGrid products={products} refreshCart={refreshCart} />
             </div>
         </>
     );
