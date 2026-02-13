@@ -1,9 +1,34 @@
 import formatMoney from '../../utils/money';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export function Product({ product, refreshCart }) {
     const [quantity, setQuantity] = useState(1);
+    const [showAddedMessage, setShowAddedMessage] = useState(false);
+    const timeoutIdRef = useRef(null);
+
+    const addToCart = async () => {
+        await axios.post('/api/cart-items', {
+            productId: product.id,
+            quantity: quantity,
+        });
+        refreshCart();
+
+        setShowAddedMessage(true);
+
+        if (timeoutIdRef.current) {
+            clearTimeout(timeoutIdRef.current);
+        }
+
+        timeoutIdRef.current = setTimeout(() => {
+            setShowAddedMessage(false);
+        }, 2000);
+    };
+
+    const selectQuantity = (event) => {
+        const quantitySelected = Number(event.target.value);
+        setQuantity(quantitySelected);
+    };
 
     return (
         <div className="product-container">
@@ -26,13 +51,8 @@ export function Product({ product, refreshCart }) {
             <div className="product-price">{formatMoney(product.priceCents)}</div>
 
             <div className="product-quantity-container">
-                <select
-                    value={quantity}
-                    onChange={(e) => {
-                        const quantitySelected = Number(e.target.value);
-                        setQuantity(quantitySelected);
-                    }}
-                >
+                <select value={quantity} onChange={selectQuantity}>
+
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -48,20 +68,14 @@ export function Product({ product, refreshCart }) {
 
             <div className="product-spacer"></div>
 
-            <div className="added-to-cart">
+            <div className="added-to-cart" style={{ opacity: showAddedMessage ? 1 : 0 }}>
                 <img src="images/icons/checkmark.png" />
-                Added
+                Added!
             </div>
 
             <button
                 className="add-to-cart-button button-primary"
-                onClick={async () => {
-                    await axios.post('/api/cart-items', {
-                        productId: product.id,
-                        quantity: quantity,
-                    });
-                    refreshCart();
-                }}
+                onClick={addToCart}
             >
                 Add to Cart
             </button>
