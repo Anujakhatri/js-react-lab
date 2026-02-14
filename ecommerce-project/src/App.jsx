@@ -22,8 +22,8 @@ function App() {
   return (
     <Routes>
       <Route index element={<HomePage cart={cart} refreshCart={refreshCart} />} />
-      <Route path='checkout' element={<CheckoutPage cart={cart} />} />
-      <Route path='orders' element={<OrdersPage cart={cart} />} />
+      <Route path='checkout' element={<CheckoutPage cart={cart} refreshCart={refreshCart} />} />
+      <Route path='orders' element={<OrdersPage cart={cart} refreshCart={refreshCart} />} />
 
     </Routes>
   )
