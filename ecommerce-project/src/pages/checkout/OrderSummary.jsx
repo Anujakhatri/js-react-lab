@@ -3,6 +3,7 @@ import formatMoney from '../../utils/money';
 import { DeliveryOptions } from './DeliveryOptions';
 
 export function OrderSummary({ cart, deliveryOptions, refreshCart }) {
+  console.log('OrderSummary refreshCart:', refreshCart);
   return (
     <div className="order-summary">
       {deliveryOptions.length > 0 && cart.map((cartItem) => {

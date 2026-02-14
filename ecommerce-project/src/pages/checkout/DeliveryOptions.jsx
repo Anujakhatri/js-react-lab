@@ -3,6 +3,7 @@ import formatMoney from '../../utils/money';
 import axios from 'axios';
 
 export function DeliveryOptions({ cartItem, deliveryOptions, refreshCart }) {
+  console.log('DeliveryOptions props:', { cartItem, deliveryOptions, refreshCart });
   return (
     <div className="delivery-options">
       <div className="delivery-options-title">
@@ -26,7 +27,7 @@ export function DeliveryOptions({ cartItem, deliveryOptions, refreshCart }) {
           <div key={deliveryOption.id} className="delivery-option" onClick={updateDeliveryOption}>
             <input type="radio"
               checked={deliveryOption.id === cartItem.deliveryOptionId}
-              readOnly
+              onChange={() => { }}
               className="delivery-option-input"
               name={`delivery-option-${cartItem.productId}`} />
             <div>
