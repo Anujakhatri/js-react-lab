@@ -5,7 +5,7 @@ import { Header } from '../../components/Header';
 import formatMoney from '../../utils/money';
 import './OrdersPage.css';
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, refreshCart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -14,6 +14,15 @@ export function OrdersPage({ cart }) {
         setOrders(response.data);
       });
   }, []);
+
+  const addToCart = (product) => {
+    axios.post('/api/cart-items', {
+      productId: product.id,
+      quantity: 1,
+    }).then(() => {
+      refreshCart();
+    });
+  };
 
   return (
     <>
@@ -65,7 +74,7 @@ export function OrdersPage({ cart }) {
                           <div className="product-quantity">
                             Quantity: {orderProduct.quantity}
                           </div>
-                          <button className="buy-again-button button-primary">
+                          <button className="buy-again-button button-primary" onClick={() => addToCart(orderProduct.product)}>
                             <img className="buy-again-icon" src="images/icons/buy-again.png" />
                             <span className="buy-again-message">Add to Cart</span>
                           </button>

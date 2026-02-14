@@ -8,7 +8,6 @@ import { OrderSummary } from './OrderSummary';
 import { PaymentSummary } from './PaymentSummary';
 export function CheckoutPage({ cart, refreshCart }) {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
-    console.log('CheckoutPage refreshCart:', refreshCart);
     const [paymentSummary, setPaymentSummary] = useState(null);
 
     const fetchPaymentSummary = async () => {
@@ -55,7 +54,7 @@ export function CheckoutPage({ cart, refreshCart }) {
 
                 <div className="checkout-grid">
                     <OrderSummary cart={cart} deliveryOptions={deliveryOptions} refreshCart={refreshCart} />
-                    <PaymentSummary paymentSummary={paymentSummary} />
+                    <PaymentSummary paymentSummary={paymentSummary} refreshCart={refreshCart} />
                 </div>
             </div>
         </>

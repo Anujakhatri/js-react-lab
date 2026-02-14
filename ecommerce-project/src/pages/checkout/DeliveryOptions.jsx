@@ -3,7 +3,6 @@ import formatMoney from '../../utils/money';
 import axios from 'axios';
 
 export function DeliveryOptions({ cartItem, deliveryOptions, refreshCart }) {
-  console.log('DeliveryOptions props:', { cartItem, deliveryOptions, refreshCart });
   return (
     <div className="delivery-options">
       <div className="delivery-options-title">
