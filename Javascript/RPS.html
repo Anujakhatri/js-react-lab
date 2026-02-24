@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock, Paper, scissors </title>
+</head>
+<body>
+    <p>rock, paper, scissors</p>
+    <button onclick= {getRandomCard}>Rock</button>
+    <button>Paper</button>
+    <button>Scissors</button>
+    <script>
+        let game=["rock","paper","scissors"]
+
+        function getRandomCard(){
+            let randomCard=Math.floor(Math.random()*3)
+            return game[randomCard]
+        }
+        console.log(getRandomCard())
+    </script>
+</body>
+</html>
